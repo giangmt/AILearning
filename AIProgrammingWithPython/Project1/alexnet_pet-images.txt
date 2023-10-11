@@ -1,0 +1,18 @@
+Command Line Arguments:
+     dir = pet_images/ 
+    arch = alexnet 
+ dogfile = dognames.txt
+
+Pet Image Label Dictionary has 40 key-value pairs.
+Below are 10 of them:
+ 1 key:     Golden_retriever_05182.jpg  label:     golden retriever 05182
+ 2 key:     Golden_retriever_05257.jpg  label:     golden retriever 05257
+ 3 key:              Basenji_00974.jpg  label:              basenji 00974
+ 4 key:                 Rabbit_002.jpg  label:                 rabbit 002
+ 5 key:       Cocker_spaniel_03750.jpg  label:       cocker spaniel 03750
+ 6 key:              Basenji_00963.jpg  label:              basenji 00963
+ 7 key:       Boston_terrier_02285.jpg  label:       boston terrier 02285
+ 8 key: German_shorthaired_pointer_04986.jpg  label: german shorthaired pointer 04986
+ 9 key:            Dalmatian_04068.jpg  label:            dalmatian 04068
+10 key:                     cat_01.jpg  label:                     cat 01
+* Doesn't Check the Results Dictionary because 'classify_images' hasn't been defined.
