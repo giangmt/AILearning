@@ -48,16 +48,16 @@ def get_pet_labels(image_dir):
     
     # ファイルリストを反復処理します
     for file in file_list:
-        # ファイル名がドットで始まらないかどうかを確認します
-        if not file.startswith("."):
-            # ファイルが有効な画像ファイル（.jpgまたは.jpegで終わる）かどうかを確認します
-            if file.endswith(".jpg") or file.endswith(".jpeg"):
-                # ファイル名をアンダースコアで分割してペットのラベルを抽出します
-                pet_label = file.lower().split('_')
-                pet_label.pop()
-                pet_label = " ".join(pet_label).strip()
-                        
-                # ペットのラベルをファイル名をキーとしてresults_dicに追加します
-                results_dic[file] = [pet_label]
-    
+        # ファイル名がドットで始まるかどうかを確認
+        if file.startswith("."):
+            continue  # ドットで始まる場合はスキップ
+
+        # ファイルが有効な画像ファイル（.jpgまたは.jpegで終わる）かどうかを確認
+        if file.endswith(".jpg") or file.endswith(".jpeg"):
+            # ファイル名をアンダースコアで分割してペットのラベルを抽出
+            pet_label = " ".join(file.lower().split('_')[:-1]).strip()
+
+            # ペットのラベルをファイル名をキーとしてresults_dicに追加
+            results_dic[file] = [pet_label]
+
     return results_dic
