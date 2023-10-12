@@ -4,7 +4,7 @@
 #                                                                             
 # PROGRAMMER: GiangMT5
 # DATE CREATED: 2023-10-05                               
-# REVISED DATE: 
+# REVISED DATE: 2023-10-12
 # PURPOSE: Create a function adjust_results4_isadog that adjusts the results 
 #          dictionary to indicate whether or not the pet image label is of-a-dog, 
 #          and to indicate whether or not the classifier image label is of-a-dog.
@@ -74,22 +74,22 @@ def adjust_results4_isadog(results_dic, dogfile):
     dog_names_dict = {name: 1 for name in dog_names}
     
     # results_dic内の各画像をループで処理します
-    for key in results_dic:
+    for value in results_dic.values():
         # results_dicからペットのラベルとクラシファイアのラベルを取得します
-        pet_label = results_dic[key][0]
-        classifier_label = results_dic[key][1]
-        
+        pet_label = value[0]
+        classifier_label = value[1]
+
         # ペットのラベルが犬の名前の中にあるかどうかを判定します
         if pet_label in dog_names_dict:
-            results_dic[key].append(1)
+            value.append(1)
         else:
-            results_dic[key].append(0)
-        
+            value.append(0)
+
         # クラシファイアのラベルが犬の名前の中にあるかどうかを判定します
         if ',' in classifier_label:
             labels = classifier_label.split(',')
             is_dog = any(label.strip() in dog_names_dict for label in labels)
-            results_dic[key].append(1 if is_dog else 0)
+            value.append(1 if is_dog else 0)
         else:
-            results_dic[key].append(1 if classifier_label in dog_names_dict else 0)
+            value.append(1 if classifier_label in dog_names_dict else 0)
 

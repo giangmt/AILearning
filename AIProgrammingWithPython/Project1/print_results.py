@@ -4,7 +4,7 @@
 #                                                                             
 # PROGRAMMER: GiangMT5
 # DATE CREATED: 2023-10-05
-# REVISED DATE: 
+# REVISED DATE: 2023-10-12
 # PURPOSE: Create a function print_results that prints the results statistics
 #          from the results statistics dictionary (results_stats_dic). It 
 #          should also allow the user to be able to print out cases of misclassified
@@ -76,14 +76,15 @@ def print_results(results_dic, results_stats_dic, model,
     # 誤分類された犬を印刷（要求された場合）
     if print_incorrect_dogs and (results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs'] != results_stats_dic['n_images']):
         print("\n** Incorrectly Classified Dogs **")
-        for key in results_dic:
-            if sum(results_dic[key][3:]) == 1:
-                print(f"Pet Label: {results_dic[key][0]}, Classifier Label: {results_dic[key][1]}")
+        for value in results_dic.values():
+            if sum(value[3:]) == 1:
+                print(f"Pet Label: {value[0]}, Classifier Label: {value[1]}")
 
     # 誤分類された犬の品種を印刷（要求された場合）
     if print_incorrect_breed and results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed']:
         print("\n** Incorrectly Classified Dog Breeds **")
-        for key in results_dic:
-            if sum(results_dic[key][3:]) == 2 and results_dic[key][2] == 0:
-                print(f"Pet Label: {results_dic[key][0]}, Classifier Label: {results_dic[key][1]}")
+        for value in results_dic.values():
+            if sum(value[3:]) == 2 and value[2] == 0:
+                print(f"Pet Label: {value[0]}, Classifier Label: {value[1]}")
+
                 

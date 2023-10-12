@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/calculates_results_stats.py
 #                                                                             
-# PROGRAMMER:
-# DATE CREATED:                                  
-# REVISED DATE: 
+# PROGRAMMER: GiangMT5
+# DATE CREATED: 2023-10-03                                
+# REVISED DATE: 2023-10-12
 # PURPOSE: Create a function calculates_results_stats that calculates the 
 #          statistics of the results of the programrun using the classifier's model 
 #          architecture to classify the images. This function will use the 
@@ -80,10 +80,10 @@ def calculates_results_stats(results_dic):
     n_correct_breed = 0
 
     # results_dicを繰り返し処理してカウントを計算します
-    for key in results_dic:
-        is_dog = results_dic[key][3]
-        is_match = results_dic[key][2]
-        classifier_is_dog = results_dic[key][4]
+    for value in results_dic.values():
+        is_dog = value[3]
+        is_match = value[2]
+        classifier_is_dog = value[4]
 
         if is_dog:
             n_dogs_img += 1
@@ -97,9 +97,9 @@ def calculates_results_stats(results_dic):
                 n_correct_notdogs += 1
         if is_match:
             n_match += 1
-
+    
     # パーセンテージを計算します
-    pct_match = (n_match / n_images) * 100
+    pct_match = (n_match / n_images) * 100 if n_images > 0 else 0
     pct_correct_dogs = (n_correct_dogs / n_dogs_img) * 100 if n_dogs_img > 0 else 0
     pct_correct_breed = (n_correct_breed / n_dogs_img) * 100 if n_dogs_img > 0 else 0
     pct_correct_notdogs = (n_correct_notdogs / n_notdogs_img) * 100 if n_notdogs_img > 0 else 0

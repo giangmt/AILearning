@@ -4,7 +4,7 @@
 #                                                                             
 # PROGRAMMER: GiangMT5
 # DATE CREATED: 2023-10-05                       
-# REVISED DATE: 
+# REVISED DATE: 2023-10-12
 # PURPOSE: Create a function classify_images that uses the classifier function 
 #          to create the classifier labels and then compares the classifier 
 #          labels to the pet image labels. This function inputs:
@@ -66,21 +66,19 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    # 画像ディレクトリ内の各画像ファイルに対してループ
-    for image_filename in listdir(images_dir):
-        # ペットのラベルを画像ファイル名から抽出（.jpg拡張子を削除）
-        pet_label = image_filename.lower().split('_')
-        pet_label.pop()
-        pet_label = " ".join(pet_label)
+    # results_dic内の各項目をイテレーションします
+    for image_filename, result_values in results_dic.items():
+        # 現在の項目からペットラベルを取得します
+        pet_label = result_values[0]
 
-        # クラシファイア関数を呼び出してクラシファイアラベルを生成
+        # 分類器ラベルを生成するためにclassifier関数を呼び出します
         classifier_label = classifier(images_dir + "/" + image_filename, model)
 
-        # クラシファイアラベルをペットのラベルと一致させるためにフォーマット 
+        # 分類器ラベルをペットラベルと一致させるためにフォーマットします
         classifier_label = classifier_label.lower().strip()
-        
-        # ペットと分類ラベルの間に一致があるかどうかを確認
+
+        # ペットラベルと分類器ラベルの一致を確認します
         is_match = 1 if pet_label in classifier_label else 0
-        
-        # 分類ラベルと比較を結果の辞書に追加
-        results_dic[image_filename] = [pet_label, classifier_label, is_match]
+
+        # 分類器ラベルと一致の結果をresults_dic内の現在の項目に追加します
+        result_values.extend([classifier_label, is_match])

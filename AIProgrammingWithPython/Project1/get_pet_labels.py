@@ -4,7 +4,7 @@
 #                                                                             
 # PROGRAMMER: GiangMT5
 # DATE CREATED: 2023-10-03                             
-# REVISED DATE: 
+# REVISED DATE: 2023-10-12
 # PURPOSE: Create the function get_pet_labels that creates the pet labels from 
 #          the image's filename. This function inputs: 
 #           - The Image Folder as image_dir within get_pet_labels function and 
@@ -48,12 +48,16 @@ def get_pet_labels(image_dir):
     
     # ファイルリストを反復処理します
     for file in file_list:
-        # ファイルが有効な画像ファイル（.jpgまたは.jpegで終わる）かどうかを確認します
-        if file.endswith(".jpg") or file.endswith(".jpeg"):
-            # ファイル名をアンダースコアで分割してペットのラベルを抽出します
-            pet_label = file.lower().replace(".jpg", "").replace(".jpeg", "").replace("_", " ").strip()
-            
-            # ペットのラベルをファイル名をキーとしてresults_dicに追加します
-            results_dic[file] = [pet_label]
+        # ファイル名がドットで始まらないかどうかを確認します
+        if not file.startswith("."):
+            # ファイルが有効な画像ファイル（.jpgまたは.jpegで終わる）かどうかを確認します
+            if file.endswith(".jpg") or file.endswith(".jpeg"):
+                # ファイル名をアンダースコアで分割してペットのラベルを抽出します
+                pet_label = file.lower().split('_')
+                pet_label.pop()
+                pet_label = " ".join(pet_label).strip()
+                        
+                # ペットのラベルをファイル名をキーとしてresults_dicに追加します
+                results_dic[file] = [pet_label]
     
     return results_dic

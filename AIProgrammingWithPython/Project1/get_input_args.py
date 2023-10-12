@@ -4,7 +4,7 @@
 #                                                                             
 # PROGRAMMER: GiangMT5
 # DATE CREATED: 2023-10-03                               
-# REVISED DATE: 
+# REVISED DATE: 2023-10-12
 # PURPOSE: Create a function that retrieves the following 3 command line inputs 
 #          from the user using the Argparse Python module. If the user fails to 
 #          provide some or all of the 3 inputs, then the default values are
@@ -43,7 +43,7 @@ def get_input_args():
 
     # 上記で説明されたように3つのコマンドライン引数を作成します。ArguementParserメソッドを使用します
     parser.add_argument('--dir', type=str, default='pet_images', help='ペット画像フォルダのパス')
-    parser.add_argument('--arch', type=str, default='vgg', help='CNNモデルアーキテクチャ（例：vgg、resnet）')
+    parser.add_argument('--arch', type=str, default='vgg', choices=['vgg', 'alexnet', 'resnet'], help='CNNモデルアーキテクチャ（例：vgg、resnet）')
     parser.add_argument('--dogfile', type=str, default='dognames.txt', help='犬の名前を含むテキストファイル')
 
     # この関数で作成した引数コレクションでNoneを置き換えるために、parser.parse_args()を使用します
