@@ -1,17 +1,17 @@
-# Sử dụng một hệ điều hành gốc như Ubuntu
+# Use a base operating system like Ubuntu
 FROM python:3.8
 
-# Thiết lập thư mục làm việc
+# Set the working directory
 WORKDIR /app
 
-# Sao chép tệp requirements.txt vào container
+# Copy the requirements.txt file into the container
 COPY requirements.txt requirements.txt
 
-# Cài đặt các thư viện từ requirements.txt
+# Install libraries from requirements.txt
 RUN pip install -r requirements.txt
 
-# Sao chép toàn bộ nội dung của thư mục dự án vào container
+# Copy the entire contents of the project directory into the container
 COPY . .
 
-# Chạy ứng dụng hoặc lệnh mặc định khi container khởi động
+# Run the application or the default command when the container starts
 CMD ["python", "check_images.py"]
